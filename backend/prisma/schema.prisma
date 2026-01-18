@@ -1,0 +1,243 @@
+// FinanceAI - Schema do Banco de Dados
+// Controle Financeiro Pessoal com IA
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== USUÁRIOS ====================
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  avatar    String?
+
+  // Preferências
+  currency String @default("BRL")
+  locale   String @default("pt-BR")
+
+  // Relacionamentos
+  accounts     Account[]
+  categories   Category[]
+  budgets      Budget[]
+  incomeConfig IncomeConfig?
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Subscription
+  plan          Plan      @default(FREE)
+  planExpiresAt DateTime?
+
+  // Onboarding
+  onboardingCompleted Boolean @default(false)
+
+  @@map("users")
+}
+
+// ==================== CONFIGURAÇÃO DE RENDA ====================
+model IncomeConfig {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Valor da renda
+  amount Decimal @db.Decimal(12, 2)
+
+  // Conta onde a renda cai
+  accountId String
+
+  // Frequência: monthly, biweekly, weekly, daily
+  frequency String
+
+  // Configuração específica (JSON com detalhes)
+  // Para mensal: { monthlyType: 'business_day' | 'fixed_day', businessDay?: number, fixedDay?: number }
+  // Para quinzenal: { biweeklyType: 'advance_salary' | 'fixed_days', ... }
+  // Para semanal: { weekDay: string }
+  config Json
+
+  // Controle
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("income_configs")
+}
+
+enum Plan {
+  FREE
+  PRO
+  BUSINESS
+}
+
+// ==================== CONTAS ====================
+model Account {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name  String // "Nubank", "Carteira", etc
+  type  AccountType
+  color String  @default("#6366f1")
+  icon  String?
+
+  // Saldo inicial
+  initialBalance Decimal @default(0) @db.Decimal(12, 2)
+
+  // Relacionamentos
+  transactions Transaction[]
+
+  // Controle
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("accounts")
+}
+
+enum AccountType {
+  CHECKING // Conta corrente
+  SAVINGS // Poupança
+  CASH // Dinheiro
+  CREDIT_CARD // Cartão de crédito
+  INVESTMENT // Investimentos
+}
+
+// ==================== CATEGORIAS ====================
+model Category {
+  id     String  @id @default(cuid())
+  userId String? // null = categoria padrão do sistema
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name  String
+  icon  String
+  color String
+  type  TransactionType
+
+  // Relacionamentos
+  transactions Transaction[]
+  budgets      Budget[]
+
+  // Controle
+  isSystem Boolean @default(false)
+  isActive Boolean @default(true)
+
+  @@unique([userId, name, type])
+  @@index([userId])
+  @@map("categories")
+}
+
+// ==================== TRANSAÇÕES ====================
+model Transaction {
+  id String @id @default(cuid())
+
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  // Dados da transação
+  type        TransactionType
+  amount      Decimal         @db.Decimal(12, 2)
+  description String
+  notes       String?
+
+  // Data
+  date DateTime
+
+  // IA
+  aiCategorized Boolean @default(false)
+  aiConfidence  Float?
+
+  // Recorrência (futuro)
+  isRecurring Boolean @default(false)
+  recurringId String?
+
+  // Controle
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([accountId])
+  @@index([categoryId])
+  @@index([date])
+  @@map("transactions")
+}
+
+enum TransactionType {
+  INCOME // Receita
+  EXPENSE // Despesa
+  TRANSFER // Transferência (futuro)
+}
+
+// ==================== RECEITAS PENDENTES ====================
+model PendingIncome {
+  id     String @id @default(cuid())
+  userId String
+
+  // Referência à configuração
+  incomeConfigId String
+
+  // Valor e conta
+  amount    Decimal @db.Decimal(12, 2)
+  accountId String
+
+  // Data esperada do recebimento
+  expectedDate DateTime
+
+  // Status
+  status    IncomeStatus @default(PENDING)
+  confirmedAt DateTime?
+
+  // Transação gerada após confirmação
+  transactionId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([expectedDate])
+  @@index([status])
+  @@map("pending_incomes")
+}
+
+enum IncomeStatus {
+  PENDING   // Aguardando recebimento
+  CONFIRMED // Confirmado/recebido
+  SKIPPED   // Pulado (não veio)
+}
+
+// ==================== ORÇAMENTOS ====================
+model Budget {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  // Valores
+  amount Decimal @db.Decimal(12, 2)
+
+  // Período
+  month Int // 1-12
+  year  Int
+
+  // Alertas
+  alertAt Int @default(80) // % para alertar
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, categoryId, month, year])
+  @@index([userId])
+  @@map("budgets")
+}
