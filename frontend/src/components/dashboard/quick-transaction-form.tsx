@@ -63,8 +63,8 @@ export function QuickTransactionForm({ onClose, onSuccess }: QuickTransactionFor
 
     try {
       const result = await suggestCategory.mutateAsync({ description, type });
-      if (result?.categoryId) {
-        setCategoryId(result.categoryId);
+      if (result?.suggestion) {
+        setCategoryId(result.suggestion);
       }
     } catch {
       // Ignora erro, usuario pode selecionar manualmente

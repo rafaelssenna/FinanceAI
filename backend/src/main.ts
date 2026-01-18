@@ -36,6 +36,11 @@ async function bootstrap() {
     }),
   );
 
+  // Health check endpoint
+  app.getHttpAdapter().get('/health', (req, res) => {
+    res.send({ status: 'ok', timestamp: new Date().toISOString() });
+  });
+
   // Swagger API Documentation
   const config = new DocumentBuilder()
     .setTitle('FinanceAI API')
