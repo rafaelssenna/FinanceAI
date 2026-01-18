@@ -30,10 +30,10 @@ import { cn } from '@/lib/utils';
 import { api } from '@/lib/api';
 
 const ACCOUNT_TYPES = [
-  { type: AccountType.CHECKING, name: 'Conta Corrente', icon: CreditCard, color: '#3b82f6', examples: 'Nubank, Inter, Itau' },
-  { type: AccountType.SAVINGS, name: 'Poupanca', icon: PiggyBank, color: '#22c55e', examples: 'Caixa, Banco do Brasil' },
+  { type: AccountType.CHECKING, name: 'Conta Corrente', icon: CreditCard, color: '#3b82f6', examples: 'Nubank, Inter, Itaú' },
+  { type: AccountType.SAVINGS, name: 'Poupança', icon: PiggyBank, color: '#22c55e', examples: 'Caixa, Banco do Brasil' },
   { type: AccountType.CASH, name: 'Carteira', icon: Banknote, color: '#f97316', examples: 'Dinheiro vivo' },
-  { type: AccountType.CREDIT_CARD, name: 'Cartao Credito', icon: CreditCard, color: '#8b5cf6', examples: 'Nubank, C6, Santander' },
+  { type: AccountType.CREDIT_CARD, name: 'Cartão Crédito', icon: CreditCard, color: '#8b5cf6', examples: 'Nubank, C6, Santander' },
   { type: AccountType.INVESTMENT, name: 'Investimentos', icon: TrendingUp, color: '#ec4899', examples: 'XP, Rico, Clear' },
 ];
 
@@ -45,7 +45,7 @@ const STEPS = [
   { id: 1, name: 'Boas-vindas' },
   { id: 2, name: 'Sua conta' },
   { id: 3, name: 'Sua renda' },
-  { id: 4, name: 'Frequencia' },
+  { id: 4, name: 'Frequência' },
   { id: 5, name: 'Pronto!' },
 ];
 
@@ -223,10 +223,10 @@ export default function OnboardingPage() {
                 <Sparkles className="h-10 w-10 text-primary" />
               </div>
               <h1 className="text-3xl font-bold mb-2">
-                Ola, {user?.name?.split(' ')[0]}!
+                Olá, {user?.name?.split(' ')[0]}!
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Vamos configurar suas financas em 2 minutos.
+                Vamos configurar suas finanças em 2 minutos.
               </p>
               <div className="space-y-4 text-left max-w-sm mx-auto mb-8">
                 <div className="flex items-center gap-3">
@@ -235,7 +235,7 @@ export default function OnboardingPage() {
                   </div>
                   <div>
                     <p className="font-medium">Onde guarda seu dinheiro</p>
-                    <p className="text-sm text-muted-foreground">Nubank, Itau, carteira...</p>
+                    <p className="text-sm text-muted-foreground">Nubank, Itaú, carteira...</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -243,8 +243,8 @@ export default function OnboardingPage() {
                     <DollarSign className="h-5 w-5 text-green-600" />
                   </div>
                   <div>
-                    <p className="font-medium">Quanto voce ganha</p>
-                    <p className="text-sm text-muted-foreground">Salario, freelance...</p>
+                    <p className="font-medium">Quanto você ganha</p>
+                    <p className="text-sm text-muted-foreground">Salário, freelance...</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -253,12 +253,12 @@ export default function OnboardingPage() {
                   </div>
                   <div>
                     <p className="font-medium">Quando recebe</p>
-                    <p className="text-sm text-muted-foreground">O app ja vai saber quando entra</p>
+                    <p className="text-sm text-muted-foreground">O app já vai saber quando entra</p>
                   </div>
                 </div>
               </div>
               <Button size="lg" onClick={() => setStep(2)} className="w-full max-w-xs">
-                Vamos la!
+                Vamos lá!
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             </CardContent>
@@ -273,9 +273,9 @@ export default function OnboardingPage() {
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Wallet className="h-8 w-8 text-primary" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2">Onde esta seu dinheiro?</h2>
+                <h2 className="text-2xl font-bold mb-2">Onde está seu dinheiro?</h2>
                 <p className="text-muted-foreground">
-                  Escolha onde voce recebe e guarda seu dinheiro
+                  Escolha onde você recebe e guarda seu dinheiro
                 </p>
               </div>
 
@@ -316,7 +316,7 @@ export default function OnboardingPage() {
                     <Label htmlFor="accountName">Nome da conta</Label>
                     <Input
                       id="accountName"
-                      placeholder="Ex: Nubank, Itau, Carteira..."
+                      placeholder="Ex: Nubank, Itaú, Carteira..."
                       value={accountName}
                       onChange={(e) => setAccountName(e.target.value)}
                       className="mt-1"
@@ -372,9 +372,9 @@ export default function OnboardingPage() {
                 <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                   <DollarSign className="h-8 w-8 text-green-600" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2">Quanto voce ganha?</h2>
+                <h2 className="text-2xl font-bold mb-2">Quanto você ganha?</h2>
                 <p className="text-muted-foreground">
-                  Sua renda principal (salario, freelance, etc)
+                  Sua renda mensal total (salário, freelance, etc)
                 </p>
               </div>
 
@@ -396,7 +396,7 @@ export default function OnboardingPage() {
                   />
                 </div>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Valor liquido que cai na sua conta
+                  Valor líquido total que você recebe por mês
                 </p>
               </div>
 
@@ -426,15 +426,15 @@ export default function OnboardingPage() {
                 <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CalendarClock className="h-8 w-8 text-purple-600" />
                 </div>
-                <h2 className="text-2xl font-bold mb-2">Quando voce recebe?</h2>
+                <h2 className="text-2xl font-bold mb-2">Quando você recebe?</h2>
                 <p className="text-muted-foreground">
-                  Com que frequencia sua renda entra
+                  Com que frequência sua renda entra
                 </p>
               </div>
 
-              {/* Frequencia */}
+              {/* Frequência */}
               <div className="mb-6">
-                <Label className="mb-3 block">Frequencia</Label>
+                <Label className="mb-3 block">Frequência</Label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
@@ -448,7 +448,7 @@ export default function OnboardingPage() {
                   >
                     <Calendar className="h-5 w-5 mb-2 text-blue-500" />
                     <p className="font-medium">Mensal</p>
-                    <p className="text-xs text-muted-foreground">1x por mes</p>
+                    <p className="text-xs text-muted-foreground">1x por mês</p>
                   </button>
                   <button
                     type="button"
@@ -462,7 +462,7 @@ export default function OnboardingPage() {
                   >
                     <CalendarDays className="h-5 w-5 mb-2 text-green-500" />
                     <p className="font-medium">Quinzenal</p>
-                    <p className="text-xs text-muted-foreground">2x por mes</p>
+                    <p className="text-xs text-muted-foreground">2x por mês (valor ÷ 2)</p>
                   </button>
                   <button
                     type="button"
@@ -489,7 +489,7 @@ export default function OnboardingPage() {
                     )}
                   >
                     <CalendarClock className="h-5 w-5 mb-2 text-purple-500" />
-                    <p className="font-medium">Diario</p>
+                    <p className="font-medium">Diário</p>
                     <p className="text-xs text-muted-foreground">Todo dia</p>
                   </button>
                 </div>
@@ -510,8 +510,8 @@ export default function OnboardingPage() {
                           : 'border-muted hover:border-muted-foreground/50'
                       )}
                     >
-                      <p className="font-medium">Dia util</p>
-                      <p className="text-xs text-muted-foreground">Ex: 5o dia util</p>
+                      <p className="font-medium">Dia útil</p>
+                      <p className="text-xs text-muted-foreground">Ex: 5º dia útil</p>
                     </button>
                     <button
                       type="button"
@@ -530,28 +530,28 @@ export default function OnboardingPage() {
 
                   {monthlyType === 'business_day' && (
                     <div className="animate-in fade-in">
-                      <Label htmlFor="businessDay">Qual dia util?</Label>
+                      <Label htmlFor="businessDay">Qual dia útil?</Label>
                       <select
                         id="businessDay"
                         value={businessDay}
                         onChange={(e) => setBusinessDay(e.target.value)}
                         className="mt-1 w-full h-12 rounded-lg border bg-background px-3"
                       >
-                        <option value="1">1o dia util</option>
-                        <option value="2">2o dia util</option>
-                        <option value="3">3o dia util</option>
-                        <option value="4">4o dia util</option>
-                        <option value="5">5o dia util</option>
-                        <option value="10">10o dia util</option>
-                        <option value="15">15o dia util</option>
-                        <option value="-1">Ultimo dia util</option>
+                        <option value="1">1º dia útil</option>
+                        <option value="2">2º dia útil</option>
+                        <option value="3">3º dia útil</option>
+                        <option value="4">4º dia útil</option>
+                        <option value="5">5º dia útil</option>
+                        <option value="10">10º dia útil</option>
+                        <option value="15">15º dia útil</option>
+                        <option value="-1">Último dia útil</option>
                       </select>
                     </div>
                   )}
 
                   {monthlyType === 'fixed_day' && (
                     <div className="animate-in fade-in">
-                      <Label htmlFor="fixedDay">Qual dia do mes?</Label>
+                      <Label htmlFor="fixedDay">Qual dia do mês?</Label>
                       <select
                         id="fixedDay"
                         value={fixedDay}
@@ -584,9 +584,9 @@ export default function OnboardingPage() {
                           : 'border-muted hover:border-muted-foreground/50'
                       )}
                     >
-                      <p className="font-medium">Adiantamento + Salario</p>
+                      <p className="font-medium">Adiantamento + Salário</p>
                       <p className="text-xs text-muted-foreground">
-                        Parte no meio do mes + resto no dia util
+                        Parte no meio do mês + resto no dia útil
                       </p>
                     </button>
                     <button
@@ -624,19 +624,19 @@ export default function OnboardingPage() {
                         </select>
                       </div>
                       <div>
-                        <Label htmlFor="salaryBusinessDay">Salario (dia util)</Label>
+                        <Label htmlFor="salaryBusinessDay">Salário (dia útil)</Label>
                         <select
                           id="salaryBusinessDay"
                           value={salaryBusinessDay}
                           onChange={(e) => setSalaryBusinessDay(e.target.value)}
                           className="mt-1 w-full h-12 rounded-lg border bg-background px-3"
                         >
-                          <option value="1">1o dia util</option>
-                          <option value="2">2o dia util</option>
-                          <option value="3">3o dia util</option>
-                          <option value="4">4o dia util</option>
-                          <option value="5">5o dia util</option>
-                          <option value="-1">Ultimo dia util</option>
+                          <option value="1">1º dia útil</option>
+                          <option value="2">2º dia útil</option>
+                          <option value="3">3º dia útil</option>
+                          <option value="4">4º dia útil</option>
+                          <option value="5">5º dia útil</option>
+                          <option value="-1">Último dia útil</option>
                         </select>
                       </div>
                     </div>
@@ -690,21 +690,21 @@ export default function OnboardingPage() {
                     className="mt-1 w-full h-12 rounded-lg border bg-background px-3"
                   >
                     <option value="monday">Segunda-feira</option>
-                    <option value="tuesday">Terca-feira</option>
+                    <option value="tuesday">Terça-feira</option>
                     <option value="wednesday">Quarta-feira</option>
                     <option value="thursday">Quinta-feira</option>
                     <option value="friday">Sexta-feira</option>
-                    <option value="saturday">Sabado</option>
+                    <option value="saturday">Sábado</option>
                     <option value="sunday">Domingo</option>
                   </select>
                 </div>
               )}
 
-              {/* Diario nao precisa de configuracao extra */}
+              {/* Diário não precisa de configuração extra */}
               {frequency === 'daily' && (
                 <div className="bg-muted/50 rounded-xl p-4 animate-in fade-in slide-in-from-bottom-4">
                   <p className="text-sm text-muted-foreground">
-                    Sua renda de <strong>R$ {income}</strong> sera registrada automaticamente todo dia util.
+                    Sua renda de <strong>R$ {income}</strong> será registrada automaticamente todo dia útil.
                   </p>
                 </div>
               )}
@@ -744,7 +744,7 @@ export default function OnboardingPage() {
               </div>
               <h1 className="text-3xl font-bold mb-2">Tudo configurado!</h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Sua renda de <strong className="text-foreground">R$ {income}</strong> sera adicionada automaticamente.
+                Sua renda de <strong className="text-foreground">R$ {income}</strong> será adicionada automaticamente.
               </p>
 
               <div className="bg-muted/50 rounded-xl p-6 mb-8 text-left">
@@ -759,7 +759,7 @@ export default function OnboardingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
-                    <span>Voce registra apenas os gastos</span>
+                    <span>Você registra apenas os gastos</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
@@ -767,7 +767,7 @@ export default function OnboardingPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <Check className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
-                    <span>Voce acompanha seu saldo em tempo real</span>
+                    <span>Você acompanha seu saldo em tempo real</span>
                   </li>
                 </ul>
               </div>

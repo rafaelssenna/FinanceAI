@@ -112,7 +112,7 @@ export function QuickTransactionForm({ onClose, onSuccess }: QuickTransactionFor
       <Card className="border-2 border-primary/20 shadow-xl">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">Nova transacao</CardTitle>
+            <CardTitle className="text-lg">Nova transação</CardTitle>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-4 w-4" />
             </Button>
@@ -124,7 +124,7 @@ export function QuickTransactionForm({ onClose, onSuccess }: QuickTransactionFor
           </div>
           <h3 className="font-semibold mb-2">Primeiro, crie uma conta</h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Voce precisa de uma conta (ex: Nubank, Carteira) para registrar transacoes.
+            Você precisa de uma conta (ex: Nubank, Carteira) para registrar transações.
           </p>
           <Button
             onClick={handleCreateDefaultAccount}
@@ -146,7 +146,7 @@ export function QuickTransactionForm({ onClose, onSuccess }: QuickTransactionFor
     <Card className="border-2 border-primary/20 shadow-xl">
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg">Nova transacao</CardTitle>
+          <CardTitle className="text-lg">Nova transação</CardTitle>
           <Button variant="ghost" size="icon" onClick={onClose}>
             <X className="h-4 w-4" />
           </Button>
@@ -205,7 +205,7 @@ export function QuickTransactionForm({ onClose, onSuccess }: QuickTransactionFor
           {/* Descricao */}
           <div>
             <Label htmlFor="description" className="flex items-center gap-2">
-              Descricao
+              Descrição
               {aiSuggesting && (
                 <span className="text-xs text-primary flex items-center gap-1">
                   <Sparkles className="h-3 w-3 animate-pulse" />
@@ -290,7 +290,7 @@ export function QuickTransactionForm({ onClose, onSuccess }: QuickTransactionFor
                 Salvando...
               </>
             ) : (
-              'Salvar transacao'
+              'Salvar transação'
             )}
           </Button>
         </form>

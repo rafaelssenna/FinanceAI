@@ -24,7 +24,7 @@ function formatDate(dateStr: string) {
     return 'Hoje';
   }
   if (date.toDateString() === tomorrow.toDateString()) {
-    return 'Amanha';
+    return 'Amanhã';
   }
 
   return date.toLocaleDateString('pt-BR', {
@@ -90,7 +90,7 @@ export function PendingIncomeCard() {
     monthly: 'Mensal',
     biweekly: 'Quinzenal',
     weekly: 'Semanal',
-    daily: 'Diario',
+    daily: 'Diário',
   };
 
   return (
@@ -98,7 +98,7 @@ export function PendingIncomeCard() {
       <CardHeader className="pb-2">
         <CardTitle className="text-base flex items-center gap-2 text-green-700 dark:text-green-400">
           <CalendarClock className="h-4 w-4" />
-          Proximas entradas
+          Próximas entradas
           <span className="text-xs font-normal text-green-600/70 dark:text-green-500/70">
             ({frequencyLabels[summary.frequency]})
           </span>
@@ -179,7 +179,7 @@ export function PendingIncomeCard() {
 
         {summary.pendingIncomes.length > 3 && (
           <p className="text-xs text-center text-green-600 dark:text-green-500">
-            +{summary.pendingIncomes.length - 3} proximos recebimentos
+            +{summary.pendingIncomes.length - 3} próximos recebimentos
           </p>
         )}
       </CardContent>

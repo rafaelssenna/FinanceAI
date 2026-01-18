@@ -19,10 +19,10 @@ import { useUIStore } from '@/stores/ui-store';
 import { useRouter } from 'next/navigation';
 
 const navigation = [
-  { name: 'Inicio', href: '/dashboard', icon: LayoutDashboard, description: 'Visao geral' },
+  { name: 'Início', href: '/dashboard', icon: LayoutDashboard, description: 'Visão geral' },
   { name: 'Minhas Contas', href: '/dashboard/accounts', icon: Wallet, description: 'Bancos e carteiras' },
-  { name: 'Transacoes', href: '/dashboard/transactions', icon: ArrowLeftRight, description: 'Gastos e receitas' },
-  { name: 'Orcamentos', href: '/dashboard/budgets', icon: Target, description: 'Metas mensais' },
+  { name: 'Transações', href: '/dashboard/transactions', icon: ArrowLeftRight, description: 'Gastos e receitas' },
+  { name: 'Orçamentos', href: '/dashboard/budgets', icon: Target, description: 'Metas mensais' },
   { name: 'Insights IA', href: '/dashboard/insights', icon: Sparkles, description: 'Dicas inteligentes' },
 ];
 

@@ -95,7 +95,7 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* Resumo do mes - Receita vs Despesa */}
+      {/* Resumo do mês - Receita vs Despesa */}
       <div className="grid grid-cols-2 gap-3">
         <Card className="border-green-200 dark:border-green-900/50">
           <CardContent className="p-4">
@@ -187,11 +187,11 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      {/* Ultimas transacoes */}
+      {/* Últimas transações */}
       <Card>
         <CardHeader className="pb-2 px-4 pt-4">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-base">Ultimas Transacoes</CardTitle>
+            <CardTitle className="text-base">Últimas Transações</CardTitle>
             <Link href="/dashboard/transactions">
               <Button variant="ghost" size="sm" className="h-7 text-xs px-2">
                 Ver todas
@@ -244,11 +244,11 @@ export default function DashboardPage() {
             <div className="py-6 text-center">
               <Wallet className="h-10 w-10 mx-auto text-muted-foreground/50 mb-3" />
               <p className="text-sm text-muted-foreground">
-                Nenhuma transacao ainda
+                Nenhuma transação ainda
               </p>
               <Link href="/dashboard/transactions">
                 <Button variant="link" size="sm" className="mt-2">
-                  Ir para transacoes
+                  Ir para transações
                   <ChevronRight className="h-3 w-3 ml-1" />
                 </Button>
               </Link>

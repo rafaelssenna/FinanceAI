@@ -17,8 +17,8 @@ import { useAuthStore } from '@/stores/auth-store';
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Digite seu nome'),
-  email: z.string().email('Email invalido'),
-  password: z.string().min(6, 'Minimo 6 caracteres'),
+  email: z.string().email('Email inválido'),
+  password: z.string().min(6, 'Mínimo 6 caracteres'),
 });
 
 type RegisterForm = z.infer<typeof registerSchema>;
@@ -67,7 +67,7 @@ export default function RegisterPage() {
             <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-2xl mb-4">
               <Wallet className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-2xl font-bold mb-2">Crie sua conta gratis</h1>
+            <h1 className="text-2xl font-bold mb-2">Crie sua conta grátis</h1>
             <p className="text-muted-foreground">
               Leva menos de 1 minuto
             </p>
@@ -79,11 +79,11 @@ export default function RegisterPage() {
                 <div className="flex flex-col gap-1 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    Gratis para sempre
+                    30 dias grátis
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    Sem cartao de credito
+                    Sem cartão de crédito
                   </div>
                 </div>
               </CardHeader>
@@ -125,7 +125,7 @@ export default function RegisterPage() {
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Minimo 6 caracteres"
+                    placeholder="Mínimo 6 caracteres"
                     className="h-12"
                     {...register('password')}
                     disabled={isLoading}
@@ -149,7 +149,7 @@ export default function RegisterPage() {
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">
-                  Ja tem uma conta?{' '}
+                  Já tem uma conta?{' '}
                   <Link href="/login" className="text-primary hover:underline font-medium">
                     Entrar
                   </Link>

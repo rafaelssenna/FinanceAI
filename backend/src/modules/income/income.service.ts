@@ -175,6 +175,30 @@ export class IncomeService {
   }
 
   /**
+   * Calcula o valor por pagamento baseado na frequência
+   * O usuário informa o valor TOTAL mensal, e dividimos pelo número de pagamentos
+   */
+  private getAmountPerPayment(totalAmount: Decimal, frequency: string): Decimal {
+    const amount = Number(totalAmount);
+
+    switch (frequency) {
+      case 'biweekly':
+        // 2 pagamentos por mês
+        return new Decimal(amount / 2);
+      case 'weekly':
+        // ~4 pagamentos por mês
+        return new Decimal(amount / 4);
+      case 'daily':
+        // ~22 dias úteis por mês
+        return new Decimal(amount / 22);
+      case 'monthly':
+      default:
+        // 1 pagamento por mês
+        return new Decimal(amount);
+    }
+  }
+
+  /**
    * Gera entradas pendentes para os proximos recebimentos
    */
   async generatePendingIncomes(userId: string): Promise<void> {
@@ -185,6 +209,9 @@ export class IncomeService {
     if (!incomeConfig || !incomeConfig.isActive) return;
 
     const nextDates = this.getNextIncomeDates(incomeConfig as IncomeConfig, 6);
+
+    // Calcula o valor por pagamento baseado na frequência
+    const amountPerPayment = this.getAmountPerPayment(incomeConfig.amount, incomeConfig.frequency);
 
     for (const expectedDate of nextDates) {
       // Verifica se ja existe uma entrada para essa data
@@ -204,7 +231,7 @@ export class IncomeService {
           data: {
             userId,
             incomeConfigId: incomeConfig.id,
-            amount: incomeConfig.amount,
+            amount: amountPerPayment,
             accountId: incomeConfig.accountId,
             expectedDate,
             status: 'PENDING',

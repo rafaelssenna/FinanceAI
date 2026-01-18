@@ -16,7 +16,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { useAuthStore } from '@/stores/auth-store';
 
 const loginSchema = z.object({
-  email: z.string().email('Email invalido'),
+  email: z.string().email('Email inválido'),
   password: z.string().min(1, 'Digite sua senha'),
 });
 
@@ -120,9 +120,9 @@ export default function LoginPage() {
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">
-                  Nao tem uma conta?{' '}
+                  Não tem uma conta?{' '}
                   <Link href="/register" className="text-primary hover:underline font-medium">
-                    Criar conta gratis
+                    Criar conta grátis
                   </Link>
                 </p>
               </CardFooter>

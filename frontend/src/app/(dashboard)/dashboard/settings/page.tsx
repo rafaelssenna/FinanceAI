@@ -30,15 +30,15 @@ import { cn } from '@/lib/utils';
 
 const profileSchema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  email: z.string().email('Email invalido'),
+  email: z.string().email('Email inválido'),
 });
 
 const passwordSchema = z.object({
-  currentPassword: z.string().min(6, 'Minimo 6 caracteres'),
-  newPassword: z.string().min(6, 'Minimo 6 caracteres'),
-  confirmPassword: z.string().min(6, 'Minimo 6 caracteres'),
+  currentPassword: z.string().min(6, 'Mínimo 6 caracteres'),
+  newPassword: z.string().min(6, 'Mínimo 6 caracteres'),
+  confirmPassword: z.string().min(6, 'Mínimo 6 caracteres'),
 }).refine((data) => data.newPassword === data.confirmPassword, {
-  message: 'Senhas nao conferem',
+  message: 'Senhas não conferem',
   path: ['confirmPassword'],
 });
 
@@ -96,15 +96,15 @@ export default function SettingsPage() {
     <div className="space-y-6 max-w-4xl">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold">Configuracoes</h1>
-        <p className="text-muted-foreground">Gerencie seu perfil e preferencias</p>
+        <h1 className="text-2xl font-bold">Configurações</h1>
+        <p className="text-muted-foreground">Gerencie seu perfil e preferências</p>
       </div>
 
       <Tabs defaultValue="profile" className="space-y-6">
         <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
           <TabsTrigger value="profile">Perfil</TabsTrigger>
-          <TabsTrigger value="appearance">Aparencia</TabsTrigger>
-          <TabsTrigger value="security">Seguranca</TabsTrigger>
+          <TabsTrigger value="appearance">Aparência</TabsTrigger>
+          <TabsTrigger value="security">Segurança</TabsTrigger>
         </TabsList>
 
         {/* Perfil */}
@@ -113,10 +113,10 @@ export default function SettingsPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="h-5 w-5" />
-                Informacoes do Perfil
+                Informações do Perfil
               </CardTitle>
               <CardDescription>
-                Atualize suas informacoes pessoais
+                Atualize suas informações pessoais
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -193,23 +193,23 @@ export default function SettingsPage() {
                   ) : saved ? (
                     <Check className="h-4 w-4 mr-2" />
                   ) : null}
-                  {saved ? 'Salvo!' : 'Salvar alteracoes'}
+                  {saved ? 'Salvo!' : 'Salvar alterações'}
                 </Button>
               </form>
             </CardContent>
           </Card>
         </TabsContent>
 
-        {/* Aparencia */}
+        {/* Aparência */}
         <TabsContent value="appearance" className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Palette className="h-5 w-5" />
-                Aparencia
+                Aparência
               </CardTitle>
               <CardDescription>
-                Personalize a aparencia do aplicativo
+                Personalize a aparência do aplicativo
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -256,16 +256,16 @@ export default function SettingsPage() {
                 </div>
               </div>
 
-              {/* Notificacoes */}
+              {/* Notificações */}
               <div className="space-y-4">
                 <Label className="flex items-center gap-2">
                   <Bell className="h-4 w-4" />
-                  Notificacoes
+                  Notificações
                 </Label>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium">Alertas de orcamento</p>
+                      <p className="font-medium">Alertas de orçamento</p>
                       <p className="text-sm text-muted-foreground">
                         Receba alertas quando atingir o limite
                       </p>
@@ -367,7 +367,7 @@ export default function SettingsPage() {
                 Zona de perigo
               </CardTitle>
               <CardDescription>
-                Acoes irreversiveis para sua conta
+                Ações irreversíveis para sua conta
               </CardDescription>
             </CardHeader>
             <CardContent>
