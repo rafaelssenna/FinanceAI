@@ -25,7 +25,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { cn } from '@/lib/utils';
 import { useFixedExpenses, useCreateFixedExpense, useUpdateFixedExpense, useDeleteFixedExpense, usePendingBills, usePayBill, useSkipBill } from '@/hooks/use-fixed-expenses';
-import { useCategories } from '@/hooks/use-categories';
+import { useCategories } from '@/hooks/use-transactions';
 import { BillStatus } from '@/types';
 
 const fixedExpenseSchema = z.object({
