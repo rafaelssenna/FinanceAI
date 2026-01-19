@@ -12,6 +12,7 @@ import {
   Sparkles,
   Menu,
   X,
+  Receipt,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/stores/auth-store';
@@ -22,6 +23,7 @@ const navigation = [
   { name: 'Início', href: '/dashboard', icon: LayoutDashboard, description: 'Visão geral' },
   { name: 'Minhas Contas', href: '/dashboard/accounts', icon: Wallet, description: 'Bancos e carteiras' },
   { name: 'Transações', href: '/dashboard/transactions', icon: ArrowLeftRight, description: 'Gastos e receitas' },
+  { name: 'Contas Fixas', href: '/dashboard/fixed-expenses', icon: Receipt, description: 'Despesas recorrentes' },
   { name: 'Orçamentos', href: '/dashboard/budgets', icon: Target, description: 'Metas mensais' },
   { name: 'Insights IA', href: '/dashboard/insights', icon: Sparkles, description: 'Dicas inteligentes' },
 ];
