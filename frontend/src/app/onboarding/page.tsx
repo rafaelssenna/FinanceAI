@@ -107,7 +107,7 @@ export default function OnboardingPage() {
   };
 
   const handleSaveIncome = async () => {
-    if (!income || !frequency || !createdAccountId) return;
+    if (!income || !frequency) return;
 
     setSavingIncome(true);
 
@@ -118,7 +118,8 @@ export default function OnboardingPage() {
       let recurrenceConfig: any = {
         frequency,
         amount: incomeValue,
-        accountId: createdAccountId,
+        // accountId é opcional - backend auto-seleciona a primeira conta
+        ...(createdAccountId && { accountId: createdAccountId }),
       };
 
       if (frequency === 'monthly') {

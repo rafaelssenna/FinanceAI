@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { PendingIncomeCard } from '@/components/dashboard/pending-income-card';
+import { PendingBillsCard } from '@/components/dashboard/pending-bills-card';
 import Link from 'next/link';
 
 function formatCurrency(value: number) {
@@ -130,6 +131,9 @@ export default function DashboardPage() {
 
       {/* Receitas Pendentes */}
       <PendingIncomeCard />
+
+      {/* Contas a Pagar */}
+      <PendingBillsCard />
 
       {/* Limites de Gastos - Preview */}
       {hasBudgets && (

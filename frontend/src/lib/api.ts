@@ -240,7 +240,7 @@ class ApiClient {
   async setIncomeConfig(data: {
     frequency: string;
     amount: number;
-    accountId: string;
+    accountId?: string; // Agora é opcional
     monthlyType?: string;
     businessDay?: number;
     fixedDay?: number;
@@ -278,6 +278,55 @@ class ApiClient {
 
   async skipIncome(id: string) {
     return this.request<any>(`/income/${id}/skip`, {
+      method: 'POST',
+    });
+  }
+
+  // Fixed Expenses (Contas Fixas)
+  async getFixedExpenses() {
+    return this.request<import('@/types').FixedExpense[]>('/fixed-expenses');
+  }
+
+  async getFixedExpense(id: string) {
+    return this.request<import('@/types').FixedExpense>(`/fixed-expenses/${id}`);
+  }
+
+  async createFixedExpense(data: import('@/types').CreateFixedExpenseDto) {
+    return this.request<import('@/types').FixedExpense>('/fixed-expenses', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateFixedExpense(id: string, data: Partial<import('@/types').CreateFixedExpenseDto>) {
+    return this.request<import('@/types').FixedExpense>(`/fixed-expenses/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteFixedExpense(id: string) {
+    return this.request<void>(`/fixed-expenses/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async getPendingBills() {
+    return this.request<import('@/types').PendingBill[]>('/fixed-expenses/pending');
+  }
+
+  async getFixedExpensesSummary() {
+    return this.request<import('@/types').FixedExpensesSummary>('/fixed-expenses/summary');
+  }
+
+  async payBill(billId: string) {
+    return this.request<any>(`/fixed-expenses/bills/${billId}/pay`, {
+      method: 'POST',
+    });
+  }
+
+  async skipBill(billId: string) {
+    return this.request<void>(`/fixed-expenses/bills/${billId}/skip`, {
       method: 'POST',
     });
   }

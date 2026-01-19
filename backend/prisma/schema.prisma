@@ -23,10 +23,11 @@ model User {
   locale   String @default("pt-BR")
 
   // Relacionamentos
-  accounts     Account[]
-  categories   Category[]
-  budgets      Budget[]
-  incomeConfig IncomeConfig?
+  accounts      Account[]
+  categories    Category[]
+  budgets       Budget[]
+  incomeConfig  IncomeConfig?
+  fixedExpenses FixedExpense[]
 
   // Timestamps
   createdAt DateTime @default(now())
@@ -123,8 +124,9 @@ model Category {
   type  TransactionType
 
   // Relacionamentos
-  transactions Transaction[]
-  budgets      Budget[]
+  transactions  Transaction[]
+  budgets       Budget[]
+  fixedExpenses FixedExpense[]
 
   // Controle
   isSystem Boolean @default(false)
@@ -240,4 +242,60 @@ model Budget {
   @@unique([userId, categoryId, month, year])
   @@index([userId])
   @@map("budgets")
+}
+
+// ==================== DESPESAS FIXAS ====================
+model FixedExpense {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  name   String            // "Aluguel", "Netflix", "Internet"
+  amount Decimal @db.Decimal(12, 2)
+  dueDay Int               // Dia do vencimento (1-31)
+
+  // Relacionamentos
+  pendingBills PendingBill[]
+
+  // Controle
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("fixed_expenses")
+}
+
+// ==================== CONTAS PENDENTES ====================
+model PendingBill {
+  id     String @id @default(cuid())
+  userId String
+
+  fixedExpenseId String
+  fixedExpense   FixedExpense @relation(fields: [fixedExpenseId], references: [id], onDelete: Cascade)
+
+  amount  Decimal  @db.Decimal(12, 2)
+  dueDate DateTime
+
+  status        BillStatus @default(PENDING)
+  paidAt        DateTime?
+  transactionId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([dueDate])
+  @@index([status])
+  @@map("pending_bills")
+}
+
+enum BillStatus {
+  PENDING  // Aguardando pagamento
+  PAID     // Pago
+  OVERDUE  // Atrasado
+  SKIPPED  // Pulado
 }

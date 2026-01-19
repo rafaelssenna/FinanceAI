@@ -9,6 +9,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
 import { BudgetsModule } from './modules/budgets/budgets.module';
 import { AiModule } from './modules/ai/ai.module';
 import { IncomeModule } from './modules/income/income.module';
+import { FixedExpensesModule } from './modules/fixed-expenses/fixed-expenses.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { IncomeModule } from './modules/income/income.module';
     BudgetsModule,
     AiModule,
     IncomeModule,
+    FixedExpensesModule,
   ],
   controllers: [],
   providers: [],

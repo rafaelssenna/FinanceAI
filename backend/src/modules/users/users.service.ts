@@ -4,7 +4,7 @@ import { PrismaService } from '../../database/prisma.service';
 interface IncomeConfigDto {
   frequency: 'monthly' | 'biweekly' | 'weekly' | 'daily';
   amount: number;
-  accountId: string;
+  accountId?: string; // Agora é opcional - usa a primeira conta se não informado
   monthlyType?: 'business_day' | 'fixed_day';
   businessDay?: number;
   fixedDay?: number;
@@ -61,7 +61,22 @@ export class UsersService {
   }
 
   async setIncomeConfig(userId: string, data: IncomeConfigDto) {
-    const { frequency, amount, accountId, ...rest } = data;
+    const { frequency, amount, accountId: providedAccountId, ...rest } = data;
+
+    // Se não informou conta, usa a primeira conta ativa do usuário
+    let accountId = providedAccountId;
+    if (!accountId) {
+      const firstAccount = await this.prisma.account.findFirst({
+        where: { userId, isActive: true },
+        orderBy: { createdAt: 'asc' },
+      });
+
+      if (!firstAccount) {
+        throw new Error('Nenhuma conta encontrada. Crie uma conta primeiro.');
+      }
+
+      accountId = firstAccount.id;
+    }
 
     // Monta o config JSON baseado na frequência
     let config: any = {};

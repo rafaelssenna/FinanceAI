@@ -162,3 +162,60 @@ export interface BudgetProgress {
   percentage: number;
   isOverBudget: boolean;
 }
+
+// ==================== Fixed Expenses ====================
+export enum BillStatus {
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  OVERDUE = 'OVERDUE',
+  SKIPPED = 'SKIPPED',
+}
+
+export interface FixedExpense {
+  id: string;
+  userId: string;
+  categoryId: string;
+  category?: Category;
+  name: string;
+  amount: number;
+  dueDay: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PendingBill {
+  id: string;
+  userId: string;
+  fixedExpenseId: string;
+  fixedExpense?: FixedExpense;
+  amount: number;
+  dueDate: string;
+  status: BillStatus;
+  paidAt?: string;
+  transactionId?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateFixedExpenseDto {
+  name: string;
+  amount: number;
+  dueDay: number;
+  categoryId: string;
+}
+
+export interface FixedExpensesSummary {
+  totalPending: number;
+  totalOverdue: number;
+  billsCount: number;
+  overdueCount: number;
+  nextBills: {
+    id: string;
+    name: string;
+    amount: number;
+    dueDate: string;
+    status: BillStatus;
+    category: Category;
+  }[];
+}
