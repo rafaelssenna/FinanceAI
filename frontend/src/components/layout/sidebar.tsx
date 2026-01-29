@@ -47,6 +47,7 @@ export function Sidebar() {
         size="icon"
         className="fixed top-4 left-4 z-50 md:hidden"
         onClick={() => setSidebarOpen(!sidebarOpen)}
+        aria-label={sidebarOpen ? "Fechar menu" : "Abrir menu"}
       >
         {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </Button>

@@ -153,6 +153,7 @@ export function PendingIncomeCard() {
                     className="h-8 w-8 p-0 text-red-500 hover:text-red-600 hover:bg-red-100"
                     onClick={() => handleSkip(income.id)}
                     disabled={isLoadingThis}
+                    aria-label="Pular recebimento"
                   >
                     <X className="h-4 w-4" />
                   </Button>

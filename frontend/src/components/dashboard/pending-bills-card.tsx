@@ -184,6 +184,7 @@ export function PendingBillsCard() {
                   onClick={() => handleSkip(bill.id)}
                   disabled={isLoadingThis}
                   title="Pular"
+                  aria-label="Pular conta"
                 >
                   <X className="h-4 w-4" />
                 </Button>
