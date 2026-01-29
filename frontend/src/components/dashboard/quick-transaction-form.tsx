@@ -113,7 +113,7 @@ export function QuickTransactionForm({ onClose, onSuccess }: QuickTransactionFor
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">Nova transação</CardTitle>
-            <Button variant="ghost" size="icon" onClick={onClose}>
+            <Button variant="ghost" size="icon" onClick={onClose} aria-label="Fechar">
               <X className="h-4 w-4" />
             </Button>
           </div>
@@ -147,7 +147,7 @@ export function QuickTransactionForm({ onClose, onSuccess }: QuickTransactionFor
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">Nova transação</CardTitle>
-          <Button variant="ghost" size="icon" onClick={onClose}>
+          <Button variant="ghost" size="icon" onClick={onClose} aria-label="Fechar">
             <X className="h-4 w-4" />
           </Button>
         </div>
